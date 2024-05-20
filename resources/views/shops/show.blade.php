@@ -14,6 +14,9 @@
                   <h1>{{ $detail->name }}</h1>
               </div>
               
+              <!--隙間の作成-->
+              <div class="col-md-12 py-2"></div>
+              
               <div class="col-md-6">
                   @foreach ($detail->images as $image)
                       <img src="{{ $image->url }}"  width="50%"  alt="...">
@@ -21,38 +24,103 @@
               </div>
               
               <div class="col-md-6">
-                  <h2>ラーメンの評価</h2>
                   
-                  <p>星を入れる（プラグインを探す）</p>
+                  <!--星を入れる（プラグインを探す）-->
                   
                   <h2>{{ $detail->explain }}</h2>
               </div>
               
+              <!--隙間の作成-->
+              <div class="col-md-12 py-2"></div>
+              
               <div class="col-md-12">
-                  <h1>地図の挿入</h1>
-                
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d209147.26432187727!2d135.62849521636954!3d35.00855736520539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60010d1edd5744bd%3A0x2ce4f16d72ef7006!2z5qiq5rWc5a6257O744Op44O844Oh44OzIOWkp-a0pSDprYLlv4PlrrY!5e0!3m2!1sja!2sjp!4v1712151174081!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <div id="map" style="height:400px"></div>
               </div>
+              
+              <!--隙間の作成-->
+              <div class="col-md-12 py-2"></div>
               
               <div class="col-md-12">
                   <h2>みんなコメント</h2>
                   
                   <div class="card">
                       <div class="card-body">
-                          <p>コメントを表示する場所</p>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($shops as $comment)
+                                    <tr>
+                                        <th scope="row">{{ $comment->id }}</th>
+                                        <td>{{ $comment->comment }}</td>
+                                        <td>{{ $comment->evaluation }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                       </div>
                       
-                      <a class="btn btn-primary" href="#" role="button">もっと見る</a>
+                      <a class='btn btn-primary' href='{{ route('shops.create', ['id'=>$detail->id]) }}'>作成する</a>
+                      
                   </div>
               </div>
+              
+              <!--隙間の作成-->
+              <div class="col-md-12 py-2"></div>
               
               <div class="col-md-12">
                   <a class="btn btn-outline-primary" href="{{ route('shops.index') }}" role="button">戻る</a>
               </div>
               
+              <!--隙間の作成-->
+              <div class="col-md-12 py-4"></div>
+              
           </div>
       </div>
    
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      
+      <script>
+            function initMap() {
+                map = document.getElementById("map");
+                
+                // 東京タワーの緯度、経度を変数に入れる
+                let place = {lat: {{ $detail->latitude }}, lng: {{ $detail->longitude }}};
+                
+               
+                // オプションの設定
+                opt = {
+                    // 地図の縮尺を指定
+                    zoom: 15,
+
+                    // センターを東京タワーに指定
+                    center: place,
+                };
+
+                // 地図のインスタンスを作成（第一引数にはマップを描画する領域、第二引数にはオプションを指定）
+                mapObj = new google.maps.Map(map, opt);
+
+                marker = new google.maps.Marker({
+                    // ピンを差す位置を東京タワーに設定
+                    position: place,
+
+                    // ピンを差すマップを指定
+                    map: mapObj,
+
+                    // ホバーしたときに「tokyotower」と表示されるように指定
+
+                    title: '{{ $detail->name }}',
+                });
+            }
+        </script>
+        
+        // Google Maps APIの読み込み（keyには自分のAPI_KEYを指定）
+        <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key={{$api_key}}&callback=initMap" async defer></script>
+      
   </body>
 </html>

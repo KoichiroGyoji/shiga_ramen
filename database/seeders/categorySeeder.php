@@ -16,6 +16,10 @@ class categorySeeder extends Seeder
      */
     public function run()
     {
+        DB::table('categories')->delete();
+         
+        DB::statement('ALTER TABLE categories AUTO_INCREMENT = 1');
+        
         DB::table('categories')->insert([
             'name' => 'チェーン店',
             'created_at' => new DateTime(),
