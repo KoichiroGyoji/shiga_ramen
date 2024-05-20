@@ -13,5 +13,14 @@ class Shop extends Model
     {
         return $this->hasMany(Image::class); 
     }
+    
+    public function categories(){
+        return $this->belongsToMany(Category::class);
+    }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class); 
+    }
 }
 

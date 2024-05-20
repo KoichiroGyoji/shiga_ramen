@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('commnet', 140);
+            $table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->string('comment', 140);
             $table->integer('evaluation');
-            $table->foreignId('shop_id')->constrained();
-            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

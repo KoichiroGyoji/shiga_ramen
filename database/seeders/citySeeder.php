@@ -16,6 +16,10 @@ class citySeeder extends Seeder
      */
     public function run()
     {
+        DB::table('cities')->delete();
+         
+        DB::statement('ALTER TABLE cities AUTO_INCREMENT = 1');
+        
         DB::table('cities')->insert([
             'name' => '大津市',
             'created_at' => new DateTime(),

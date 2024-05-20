@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class shop_category extends Model
 {
     use HasFactory;
+    
 }
