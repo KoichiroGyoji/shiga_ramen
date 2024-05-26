@@ -18,7 +18,7 @@ class categorySeeder extends Seeder
     {
         DB::table('categories')->delete();
          
-        DB::statement('ALTER TABLE categories AUTO_INCREMENT = 1');
+        DB::statement('ALTER SEQUENCE categories_id_seq RESTART WITH 1');
         
         DB::table('categories')->insert([
             'name' => 'チェーン店',

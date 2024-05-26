@@ -19,7 +19,8 @@ class shopSeeder extends Seeder
     {
          DB::table('shops')->delete();
          
-         DB::statement('ALTER TABLE shops AUTO_INCREMENT = 1');
+         DB::statement('ALTER SEQUENCE shops_id_seq RESTART WITH 1');
+         
        
          DB::table('shops')->insert([
             'name' => '横浜家系ラーメン 大津 魂心屋',

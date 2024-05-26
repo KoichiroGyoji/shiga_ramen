@@ -18,7 +18,7 @@ class citySeeder extends Seeder
     {
         DB::table('cities')->delete();
          
-        DB::statement('ALTER TABLE cities AUTO_INCREMENT = 1');
+        DB::statement('ALTER SEQUENCE cities_id_seq RESTART WITH 1');
         
         DB::table('cities')->insert([
             'name' => '大津市',

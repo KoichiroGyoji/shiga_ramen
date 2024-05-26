@@ -18,7 +18,7 @@ class imageSeeder extends Seeder
     {
          DB::table('images')->delete();
          
-         DB::statement('ALTER TABLE images AUTO_INCREMENT = 1');
+         DB::statement('ALTER SEQUENCE images_id_seq RESTART WITH 1');
        
          DB::table('images')->insert([
             'shop_id' => '1',
