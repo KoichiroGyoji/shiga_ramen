@@ -17,11 +17,13 @@
                     
                     <div class="title">
                         <h2>evaluation</h2>
-                        <input type="text" name="comment[evaluation]" placeholder="1~5で評価してください"/>
+                        <input type="text" name="comment[evaluation]" placeholder="1~5で評価してください" value="{{ old('comment.evaluation') }}"/>
+                        <p class="title__error" style="color:red">{{ $errors->first('comment.evaluation') }}</p>
                     </div>
                     <div class="body">
                         <h2>comment</h2>
-                        <textarea name="comment[comment]" maxlength="140" rows="10" cols="50" placeholder="140文字以内でコメントしてください"></textarea>
+                        <textarea name="comment[comment]" maxlength="140" rows="10" cols="50" placeholder="140文字以内でコメントしてください" value="{{ old('comment.comment') }}"></textarea>
+                        <p class="body__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
                     </div>
                     <input type="submit" value="store"/>
                 </form>

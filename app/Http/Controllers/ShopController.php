@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Comment;
+use App\Http\Requests\PostRequest;
 
 class ShopController extends Controller
 {
@@ -88,7 +89,7 @@ class ShopController extends Controller
         ]); 
     }
     
-    public function store($id, Comment $comment, Request $request){
+    public function store($id, Comment $comment, PostRequest $request){
         
         $store_detail = Shop::find($id);
         
