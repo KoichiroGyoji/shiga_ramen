@@ -21,6 +21,6 @@ Route::get('/show/{id}', [ShopController::class, 'show'])->name('shops.show');
 
 Route::get('/create/{id}', [ShopController::class, 'create'])->name('shops.create');
 
-Route::post('/posts/{id}', [ShopController::class, 'store'])->name('shops.posts');;
+Route::post('/create/{id}', [ShopController::class, 'store'])->name('shops.posts');;
 
 Route::get('searchproduct', 'App\Http\Controllers\ShopController@search')->name('searchproduct');
